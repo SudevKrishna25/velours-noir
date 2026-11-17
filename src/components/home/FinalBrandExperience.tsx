@@ -1,33 +1,78 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Sparkles } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GoldParticles from "@/components/ui/GoldParticles";
 
 export default function FinalBrandExperience() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const bottleRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current || !bottleRef.current || !textRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Bottle illuminated with gold rim light & scale on scroll
+      gsap.fromTo(
+        bottleRef.current,
+        { scale: 0.9, opacity: 0.6, y: 30 },
+        {
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 70%",
+            end: "top 25%",
+            scrub: 1,
+          },
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          ease: "power2.out",
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="relative py-36 sm:py-48 bg-[#12041A] text-[#F4EAF2] overflow-hidden flex items-center justify-center text-center">
+    <section
+      id="finale"
+      ref={containerRef}
+      className="relative py-36 sm:py-52 bg-[#0D0312] text-[#F4EAF2] overflow-hidden flex items-center justify-center text-center"
+      data-cursor="INQUIRE"
+    >
       {/* Background Deep Plum Vignette & Soft Ambient Radial Light */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#3B174D]/40 via-[#1D0A29]/70 to-[#12041A] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#3B174D]/45 via-[#180722]/80 to-[#0D0312] pointer-events-none" />
 
       {/* Gold Dust Particles */}
-      <GoldParticles count={30} />
+      <GoldParticles count={32} />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-12 flex flex-col items-center">
-        {/* Monogram Seal */}
-        <div className="w-16 h-16 relative mb-8 opacity-85">
+      <div
+        ref={textRef}
+        className="relative z-10 max-w-4xl mx-auto px-6 sm:px-12 flex flex-col items-center"
+      >
+        {/* Central Flacon Spotlight Silhouette with Gold Rim Lighting */}
+        <div
+          ref={bottleRef}
+          className="relative w-48 h-64 sm:w-56 sm:h-72 mb-10 rounded-xl overflow-hidden border border-[#B9955B]/50 shadow-[0_0_50px_rgba(185,149,91,0.25)]"
+        >
           <Image
-            src="/images/brand/vn_monogram.svg"
-            alt="Velours Noir Monogram"
+            src="/images/hero_bottle.jpg"
+            alt="Velours Noir Flacon Finale"
             fill
-            className="object-contain"
+            className="object-cover filter contrast-[1.2] brightness-90"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0D0312] via-transparent to-[#F4EAF2]/10 pointer-events-none" />
+          <div className="absolute inset-0 border border-[#B9955B]/40 rounded-xl pointer-events-none" />
         </div>
 
         {/* Small Tagline */}
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-[#B9955B]/30 bg-[#3B174D]/30 mb-6">
+        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-[#B9955B]/30 bg-[#3B174D]/40 mb-6">
           <Sparkles className="w-3.5 h-3.5 text-[#B9955B]" />
           <span className="text-[10px] uppercase tracking-[0.35em] text-[#B9955B] font-mono">
             The Final Impression
@@ -67,8 +112,16 @@ export default function FinalBrandExperience() {
           </Link>
         </div>
 
-        {/* Final Fine Gold Accent Hairline */}
-        <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#B9955B]/60 to-transparent mt-16" />
+        {/* Brand Wordmark Sign-off */}
+        <div className="mt-16 flex flex-col items-center">
+          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#B9955B]/60 to-transparent mb-6" />
+          <span className="font-serif tracking-[0.45em] text-lg sm:text-xl text-[#F4EAF2] font-light">
+            VELOURS NOIR
+          </span>
+          <span className="text-[9px] uppercase tracking-[0.4em] text-[#B9955B]/80 font-mono mt-1">
+            Paris • Place Vendôme
+          </span>
+        </div>
       </div>
     </section>
   );

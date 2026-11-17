@@ -78,14 +78,18 @@ export default function ScentExperiencePyramid() {
   const current = PYRAMID_DATA.find((p) => p.id === activeLevel)!;
 
   return (
-    <section className="relative py-28 sm:py-36 bg-[#160620] text-[#F4EAF2] overflow-hidden border-t border-[#B9955B]/15">
+    <section
+      id="pyramid"
+      className="relative py-28 sm:py-40 bg-[#160620] text-[#F4EAF2] overflow-hidden border-t border-[#B9955B]/15"
+      data-cursor="EXPLORE"
+    >
       {/* Background soft ambient radial violet glow */}
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-96 bg-[#633A78]/25 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-[#633A78]/25 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-12 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-[#B9955B]/25 bg-[#3B174D]/30 mb-4">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border border-[#B9955B]/25 bg-[#3B174D]/40 mb-4">
             <Compass className="w-3.5 h-3.5 text-[#B9955B]" />
             <span className="text-[10px] uppercase tracking-[0.3em] text-[#B9955B] font-mono">
               03 — The Olfactory Architecture
@@ -106,7 +110,7 @@ export default function ScentExperiencePyramid() {
           </p>
         </div>
 
-        {/* 3-Stage Progress Selector Bar */}
+        {/* 3-Stage Interactive Selector with Gold Rail */}
         <div className="grid grid-cols-3 max-w-3xl mx-auto mb-16 border-b border-[#B9955B]/20 pb-4">
           {PYRAMID_DATA.map((lvl) => {
             const isSelected = lvl.id === activeLevel;
@@ -130,7 +134,7 @@ export default function ScentExperiencePyramid() {
                 </span>
 
                 {isSelected && (
-                  <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-16 h-[2px] bg-[#B9955B] shadow-md shadow-[#B9955B]" />
+                  <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-20 h-[2px] bg-gradient-to-r from-transparent via-[#B9955B] to-transparent shadow-lg shadow-[#B9955B]" />
                 )}
               </button>
             );
@@ -138,10 +142,10 @@ export default function ScentExperiencePyramid() {
         </div>
 
         {/* Interactive Stage Visual & Olfactory Anatomy */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-[#1D0A29]/50 border border-[#B9955B]/25 rounded-lg p-6 sm:p-12 backdrop-blur-md">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-[#1D0A29]/60 border border-[#B9955B]/30 rounded-xl p-6 sm:p-12 lg:p-16 backdrop-blur-xl shadow-2xl">
           {/* Left: Atmospheric Botanical Portrait */}
           <div className="lg:col-span-6 relative">
-            <div className="relative aspect-[3/4] w-full rounded overflow-hidden border border-[#B9955B]/30 shadow-2xl">
+            <div className="relative aspect-[3/4] w-full rounded-lg overflow-hidden border border-[#B9955B]/40 shadow-2xl">
               <Image
                 src={current.image}
                 alt={current.heading}
@@ -174,11 +178,11 @@ export default function ScentExperiencePyramid() {
               </span>
             </div>
 
-            <h3 className="font-serif text-3xl sm:text-4xl text-[#F4EAF2] font-light">
+            <h3 className="font-serif text-3xl sm:text-5xl text-[#F4EAF2] font-light">
               {current.heading}
             </h3>
 
-            <div className="w-16 h-[1px] bg-[#B9955B]" />
+            <div className="w-20 h-[1.5px] bg-[#B9955B]" />
 
             <p className="font-sans text-xs sm:text-sm text-[#F4EAF2]/80 leading-relaxed">
               {current.description}
@@ -189,14 +193,14 @@ export default function ScentExperiencePyramid() {
               <span className="block text-[10px] uppercase tracking-[0.25em] text-[#B9955B] font-mono mb-3">
                 Key Olfactory Botanicals
               </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {current.botanicals.map((botanical) => (
                   <div
                     key={botanical}
-                    className="flex items-center space-x-2.5 p-3 rounded bg-[#12041A]/80 border border-[#B9955B]/15"
+                    className="flex items-center space-x-2.5 p-3.5 rounded bg-[#12041A]/85 border border-[#B9955B]/20"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#B9955B]" />
-                    <span className="font-serif text-xs text-[#F4EAF2]">
+                    <span className="font-serif text-xs sm:text-sm text-[#F4EAF2]">
                       {botanical}
                     </span>
                   </div>
@@ -206,7 +210,7 @@ export default function ScentExperiencePyramid() {
 
             <p className="text-[11px] text-[#9B709F] italic pt-2">
               All botanicals are macerated in our dark Grasse chambers for six
-              months to ensure complete olfactory maturation.
+              months to ensure complete molecular harmony.
             </p>
           </div>
         </div>

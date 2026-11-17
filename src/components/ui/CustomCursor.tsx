@@ -6,7 +6,6 @@ export default function CustomCursor() {
   const [enabled, setEnabled] = useState(false);
   const [cursorText, setCursorText] = useState("");
   const [isHovered, setIsHovered] = useState(false);
-  const [isMagnetic, setIsMagnetic] = useState(false);
 
   const dotRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
@@ -38,21 +37,19 @@ export default function CustomCursor() {
       const target = e.target as HTMLElement | null;
       if (!target) return;
 
-      const interactive = target.closest("a, button, [role='button'], input, textarea");
       const customCursorEl = target.closest("[data-cursor]") as HTMLElement | null;
+      const interactive = target.closest("a, button, [role='button'], input, textarea");
 
       if (customCursorEl) {
-        setCursorText(customCursorEl.getAttribute("data-cursor") || "");
+        const text = customCursorEl.getAttribute("data-cursor") || "EXPLORE";
+        setCursorText(text);
         setIsHovered(true);
-        setIsMagnetic(true);
       } else if (interactive) {
         setCursorText("");
         setIsHovered(true);
-        setIsMagnetic(false);
       } else {
         setCursorText("");
         setIsHovered(false);
-        setIsMagnetic(false);
       }
     };
 
@@ -64,8 +61,8 @@ export default function CustomCursor() {
       start + (end - start) * factor;
 
     const render = () => {
-      circlePos.current.x = lerp(circlePos.current.x, mousePos.current.x, 0.16);
-      circlePos.current.y = lerp(circlePos.current.y, mousePos.current.y, 0.16);
+      circlePos.current.x = lerp(circlePos.current.x, mousePos.current.x, 0.18);
+      circlePos.current.y = lerp(circlePos.current.y, mousePos.current.y, 0.18);
 
       if (circleRef.current) {
         circleRef.current.style.transform = `translate3d(${circlePos.current.x}px, ${circlePos.current.y}px, 0)`;
@@ -86,7 +83,7 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Precision center dot */}
+      {/* Precision center pinpoint */}
       <div
         ref={dotRef}
         aria-hidden="true"
@@ -95,29 +92,32 @@ export default function CustomCursor() {
           width: isHovered ? "4px" : "5px",
           height: isHovered ? "4px" : "5px",
           backgroundColor: isHovered ? "#B9955B" : "#F4EAF2",
-          boxShadow: "0 0 8px rgba(185, 149, 91, 0.6)",
+          boxShadow: "0 0 10px rgba(185, 149, 91, 0.7)",
         }}
       />
 
-      {/* Trailing luxury ring */}
+      {/* Trailing luxury ring with magnetic fluidity */}
       <div
         ref={circleRef}
         aria-hidden="true"
         className="pointer-events-none fixed top-0 left-0 z-[9998] flex items-center justify-center -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-300 ease-out will-change-transform"
         style={{
-          width: cursorText ? "84px" : isHovered ? "48px" : "32px",
-          height: cursorText ? "84px" : isHovered ? "48px" : "32px",
+          width: cursorText ? "88px" : isHovered ? "48px" : "32px",
+          height: cursorText ? "88px" : isHovered ? "48px" : "32px",
           border: cursorText
-            ? "1px solid rgba(185, 149, 91, 0.85)"
+            ? "1px solid rgba(185, 149, 91, 0.9)"
             : isHovered
-            ? "1px solid rgba(185, 149, 91, 0.5)"
+            ? "1px solid rgba(185, 149, 91, 0.6)"
             : "1px solid rgba(185, 149, 91, 0.3)",
           backgroundColor: cursorText
-            ? "rgba(59, 23, 77, 0.82)"
+            ? "rgba(59, 23, 77, 0.85)"
             : isHovered
-            ? "rgba(99, 58, 120, 0.18)"
+            ? "rgba(99, 58, 120, 0.2)"
             : "transparent",
-          backdropFilter: cursorText ? "blur(4px)" : "none",
+          backdropFilter: cursorText ? "blur(6px)" : "none",
+          boxShadow: cursorText
+            ? "0 0 25px rgba(59, 23, 77, 0.6)"
+            : "none",
         }}
       >
         {cursorText && (

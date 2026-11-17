@@ -2,57 +2,66 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import GoldParticles from "@/components/ui/GoldParticles";
 
 interface CinematicIntroProps {
   onComplete?: () => void;
 }
 
 export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
-  const [stage, setStage] = useState<
-    "line" | "monogram" | "wordmark" | "tagline" | "curtain" | "done"
-  >("line");
+  const [scene, setScene] = useState<
+    "darkness" | "monogram" | "reveal" | "curtain" | "finished"
+  >("darkness");
+  const [lineProgress, setLineProgress] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // Check reduced motion or previous dismissal in session
+    // Respect reduced-motion preference
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    const hasSeenIntro = sessionStorage.getItem("vn_intro_seen");
+    const hasSeenIntro = sessionStorage.getItem("vn_intro_v2");
 
     if (prefersReducedMotion || hasSeenIntro) {
       setIsVisible(false);
-      setStage("done");
+      setScene("finished");
       if (onComplete) onComplete();
       return;
     }
 
-    // Choreographed timeline
-    // 0ms: fine gold line starts drawing
-    const t1 = setTimeout(() => setStage("monogram"), 600);
-    const t2 = setTimeout(() => setStage("wordmark"), 1400);
-    const t3 = setTimeout(() => setStage("tagline"), 2200);
-    const t4 = setTimeout(() => setStage("curtain"), 3200);
-    const t5 = setTimeout(() => {
+    // SCENE 1: Darkness & Atmospheric Light & Fine Gold Line Drawing (0ms - 800ms)
+    const t0 = setTimeout(() => setLineProgress(true), 200);
+
+    // SCENE 2: The Monogram Emerges from darkness (800ms - 1700ms)
+    const t1 = setTimeout(() => setScene("monogram"), 800);
+
+    // SCENE 3: The Typographic Reveal "VELOURS NOIR" + Tagline (1700ms - 2700ms)
+    const t2 = setTimeout(() => setScene("reveal"), 1700);
+
+    // SCENE 4: The Boutique Curtain Mask Transition (2700ms - 3500ms)
+    const t3 = setTimeout(() => setScene("curtain"), 2700);
+
+    // FINISHED: Removed from DOM (3500ms)
+    const t4 = setTimeout(() => {
       setIsVisible(false);
-      setStage("done");
-      sessionStorage.setItem("vn_intro_seen", "true");
+      setScene("finished");
+      sessionStorage.setItem("vn_intro_v2", "true");
       if (onComplete) onComplete();
-    }, 4000);
+    }, 3600);
 
     return () => {
+      clearTimeout(t0);
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);
       clearTimeout(t4);
-      clearTimeout(t5);
     };
   }, [onComplete]);
 
   const handleSkip = () => {
     setIsVisible(false);
-    setStage("done");
-    sessionStorage.setItem("vn_intro_seen", "true");
+    setScene("finished");
+    sessionStorage.setItem("vn_intro_v2", "true");
     if (onComplete) onComplete();
   };
 
@@ -61,50 +70,50 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
   return (
     <div
       role="dialog"
-      aria-label="Welcome to Velours Noir"
-      className={`fixed inset-0 z-[999] flex flex-col items-center justify-center bg-[#12041A] transition-all duration-1000 ease-[cubic-bezier(0.85,0,0.15,1)] ${
-        stage === "curtain"
-          ? "-translate-y-full opacity-0 pointer-events-none"
+      aria-label="Welcome to Velours Noir Flagship"
+      className={`fixed inset-0 z-[1000] flex flex-col items-center justify-center bg-[#0D0312] transition-all duration-1000 ease-[cubic-bezier(0.85,0,0.15,1)] ${
+        scene === "curtain"
+          ? "pointer-events-none -translate-y-full opacity-0"
           : "opacity-100"
       }`}
     >
-      {/* Background subtle radial plum light */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#3B174D]/40 via-[#1D0A29]/80 to-[#12041A] pointer-events-none" />
+      {/* Scene 1: Faint atmospheric light & gold particles */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#3B174D]/50 via-[#180722]/80 to-[#0D0312] pointer-events-none" />
 
-      {/* Center choreographed container */}
+      {/* Floating Gold Particles in the opening darkness */}
+      <GoldParticles count={30} />
+
+      {/* Center Choreography Container */}
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-xl">
-        {/* Step 1: Fine gold hairline animation */}
+        {/* Fine gold line drawing itself across the center */}
         <div
-          className={`h-[1px] bg-gradient-to-r from-transparent via-[#B9955B] to-transparent transition-all duration-700 ease-out mb-8 ${
-            stage !== "line" ? "w-48 sm:w-64 opacity-100" : "w-0 opacity-0"
+          className={`h-[1px] bg-gradient-to-r from-transparent via-[#B9955B] to-transparent transition-all duration-800 ease-out mb-8 ${
+            lineProgress ? "w-48 sm:w-72 opacity-100" : "w-0 opacity-0"
           }`}
         />
 
-        {/* Step 2: VN Monogram fade and scale */}
+        {/* Scene 2: The VN Monogram emerging with metallic lighting */}
         <div
-          className={`w-16 h-16 sm:w-20 sm:h-20 relative mb-6 transition-all duration-700 transform ${
-            stage === "monogram" ||
-            stage === "wordmark" ||
-            stage === "tagline" ||
-            stage === "curtain"
-              ? "opacity-100 scale-100"
+          className={`w-16 h-16 sm:w-20 sm:h-20 relative mb-6 transition-all duration-800 transform ${
+            scene === "monogram" || scene === "reveal" || scene === "curtain"
+              ? "opacity-100 scale-100 filter drop-shadow-[0_0_15px_rgba(185,149,91,0.5)]"
               : "opacity-0 scale-90"
           }`}
         >
           <Image
             src="/images/brand/vn_monogram.svg"
-            alt="Velours Noir Monogram"
+            alt="Velours Noir Seal"
             fill
             className="object-contain"
             priority
           />
         </div>
 
-        {/* Step 3: Typography Reveal: VELOURS NOIR */}
+        {/* Scene 3: Typographic reveal: VELOURS NOIR */}
         <div className="overflow-hidden mb-3">
           <h2
-            className={`font-serif tracking-[0.45em] sm:tracking-[0.6em] text-2xl sm:text-4xl text-[#F4EAF2] font-light transition-transform duration-700 ease-out ${
-              stage === "wordmark" || stage === "tagline" || stage === "curtain"
+            className={`font-serif tracking-[0.45em] sm:tracking-[0.6em] text-2xl sm:text-4xl text-[#F4EAF2] font-light transition-transform duration-800 ease-out ${
+              scene === "reveal" || scene === "curtain"
                 ? "translate-y-0 opacity-100"
                 : "translate-y-full opacity-0"
             }`}
@@ -113,11 +122,11 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
           </h2>
         </div>
 
-        {/* Step 4: Tagline: "THE ART OF BEING REMEMBERED." */}
+        {/* Tagline Reveal: THE ART OF BEING REMEMBERED */}
         <div className="overflow-hidden">
           <p
             className={`text-[10px] sm:text-xs uppercase tracking-[0.35em] text-[#B9955B] font-sans font-medium transition-all duration-700 ease-out ${
-              stage === "tagline" || stage === "curtain"
+              scene === "reveal" || scene === "curtain"
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-4"
             }`}
@@ -127,10 +136,10 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
         </div>
       </div>
 
-      {/* Skip button for immediate access */}
+      {/* Skip Button */}
       <button
         onClick={handleSkip}
-        className="absolute bottom-10 right-8 sm:right-12 z-20 text-[10px] uppercase tracking-[0.25em] text-[#9B709F] hover:text-[#B9955B] transition-colors py-1 px-3 border border-[#B9955B]/20 rounded-full"
+        className="absolute bottom-8 right-8 z-20 text-[10px] uppercase tracking-[0.25em] text-[#9B709F] hover:text-[#B9955B] transition-colors py-1.5 px-4 border border-[#B9955B]/20 rounded-full bg-[#12041A]/50 backdrop-blur-sm"
       >
         Skip Opening →
       </button>
