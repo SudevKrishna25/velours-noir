@@ -15,21 +15,21 @@ export default function JournalPage() {
   const others = JOURNAL_ARTICLES.slice(1);
 
   return (
-    <div className="min-h-screen bg-[#12041A] text-[#F4EAF2] pt-32 pb-24">
+    <div className="min-h-screen bg-[#12041A] text-[#F4EAF2] pt-24 sm:pt-32 pb-16 sm:pb-24">
       {/* Background ambient glow */}
       <div className="absolute top-28 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#3B174D]/25 blur-[160px] pointer-events-none rounded-full" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-[#B9955B]/30 bg-[#3B174D]/30 mb-4">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-20">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-[#B9955B]/30 bg-[#3B174D]/30 mb-3 sm:mb-4">
             <BookOpen className="w-3.5 h-3.5 text-[#B9955B]" />
-            <span className="text-[10px] uppercase tracking-[0.3em] text-[#B9955B] font-mono">
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#B9955B] font-mono">
               Les Carnets Noirs • Revue Éditoriale
             </span>
           </div>
 
-          <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-light text-[#F4EAF2] tracking-tight">
+          <h1 className="font-serif text-3xl sm:text-6xl md:text-7xl font-light text-[#F4EAF2] tracking-tight">
             NOTES FROM
             <br />
             <span className="italic font-normal gold-gradient-text">
@@ -37,7 +37,7 @@ export default function JournalPage() {
             </span>
           </h1>
 
-          <p className="font-sans text-xs sm:text-sm text-[#9B709F] mt-4 max-w-xl mx-auto leading-relaxed">
+          <p className="font-sans text-xs sm:text-sm text-[#9B709F] mt-3 sm:mt-4 max-w-xl mx-auto leading-relaxed px-2">
             Critical essays on olfactory architecture, the philosophy of
             invisible presence, and conversations with master perfumers in
             Paris and Grasse.
@@ -45,10 +45,10 @@ export default function JournalPage() {
         </div>
 
         {/* Featured Editorial Article */}
-        <div className="mb-20">
+        <div className="mb-12 sm:mb-20">
           <Link
             href={`/journal/${featured.slug}`}
-            className="group grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#1D0A29]/60 border border-[#B9955B]/30 rounded-lg overflow-hidden hover:border-[#B9955B] transition-all duration-500 shadow-2xl p-6 sm:p-10"
+            className="group grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center bg-[#1D0A29]/60 border border-[#B9955B]/30 rounded-xl overflow-hidden hover:border-[#B9955B] transition-all duration-500 shadow-2xl p-5 sm:p-10"
           >
             <div className="lg:col-span-7 relative aspect-[16/10] w-full rounded overflow-hidden">
               <Image

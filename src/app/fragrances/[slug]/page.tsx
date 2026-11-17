@@ -55,31 +55,31 @@ export default async function FragranceDetailPage({ params }: PageProps) {
   );
 
   return (
-    <div className="min-h-screen bg-[#12041A] text-[#F4EAF2] pt-28 pb-24">
+    <div className="min-h-screen bg-[#12041A] text-[#F4EAF2] pt-24 sm:pt-28 pb-16 sm:pb-24">
       {/* Background ambient plum glow */}
       <div
         className="pointer-events-none fixed top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full blur-[160px] opacity-25"
         style={{ backgroundColor: fragrance.dominantColor }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         {/* Breadcrumb & Back Navigation */}
-        <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#B9955B]/15">
+        <div className="flex items-center justify-between mb-6 sm:mb-8 pb-3 sm:pb-4 border-b border-[#B9955B]/15">
           <Link
             href="/collection"
-            className="group inline-flex items-center space-x-2 text-xs uppercase tracking-[0.25em] text-[#9B709F] hover:text-[#B9955B] transition-colors"
+            className="group inline-flex items-center space-x-2 text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#9B709F] hover:text-[#B9955B] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
             <span>Return to Collection</span>
           </Link>
 
-          <span className="text-[10px] uppercase tracking-widest text-[#B9955B] font-mono">
-            {fragrance.id} • {fragrance.concentration.split("(")[0]}
+          <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#B9955B] font-mono">
+            {fragrance.id} • {fragrance.volume}
           </span>
         </div>
 
-        {/* Hero Product Split: Flacon on Left, Haute Editorial on Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-24">
+        {/* Hero Product Split */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start mb-16 sm:mb-24">
           {/* Left Column: Heavy Glass Flacon Visual & Detail Shots */}
           <div className="lg:col-span-6 space-y-6">
             <div className="relative aspect-[4/5] w-full rounded-lg overflow-hidden border border-[#B9955B]/30 shadow-2xl bg-[#160620]">

@@ -161,7 +161,7 @@ export default function ScentProfilerModal({
       aria-modal="true"
       className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6 bg-[#0D0312]/92 backdrop-blur-2xl animate-in fade-in duration-300"
     >
-      <div className="relative w-full max-w-3xl bg-[#1D0A29]/95 border border-[#B9955B]/40 rounded-2xl p-6 sm:p-12 shadow-2xl overflow-hidden text-[#F4EAF2]">
+      <div className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto bg-[#1D0A29]/95 border border-[#B9955B]/40 rounded-2xl p-5 sm:p-10 md:p-12 shadow-2xl text-[#F4EAF2]">
         {/* Subtle radial plum ambient backdrop glow */}
         <div className="absolute top-0 right-0 w-80 h-80 bg-[#3B174D]/40 rounded-full blur-[100px] pointer-events-none" />
 

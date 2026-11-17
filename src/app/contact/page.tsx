@@ -41,21 +41,21 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#12041A] text-[#F4EAF2] pt-32 pb-24">
+    <div className="min-h-screen bg-[#12041A] text-[#F4EAF2] pt-24 sm:pt-32 pb-16 sm:pb-24">
       {/* Background ambient radial glow */}
       <div className="absolute top-28 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#3B174D]/25 blur-[160px] pointer-events-none rounded-full" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         {/* Editorial Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-[#B9955B]/30 bg-[#3B174D]/30 mb-4">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-20">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-[#B9955B]/30 bg-[#3B174D]/30 mb-3 sm:mb-4">
             <Sparkles className="w-3.5 h-3.5 text-[#B9955B]" />
-            <span className="text-[10px] uppercase tracking-[0.3em] text-[#B9955B] font-mono">
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#B9955B] font-mono">
               Le Concierge • Place Vendôme
             </span>
           </div>
 
-          <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-light text-[#F4EAF2] tracking-tight">
+          <h1 className="font-serif text-3xl sm:text-6xl md:text-7xl font-light text-[#F4EAF2] tracking-tight">
             PRIVATE ATELIER
             <br />
             <span className="italic font-normal gold-gradient-text">
@@ -63,7 +63,7 @@ export default function ContactPage() {
             </span>
           </h1>
 
-          <p className="font-sans text-xs sm:text-sm text-[#9B709F] mt-4 max-w-xl mx-auto leading-relaxed">
+          <p className="font-sans text-xs sm:text-sm text-[#9B709F] mt-3 sm:mt-4 max-w-xl mx-auto leading-relaxed px-2">
             By private appointment only. Experience our formulations in the
             seclusion of our salon overlooking the historic colonnades of Place
             Vendôme.
@@ -71,9 +71,9 @@ export default function ContactPage() {
         </div>
 
         {/* 2-Column Split: Form on Left, Paris Atelier Info on Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-start">
           {/* Left Column: Interactive Concierge Reservation Form */}
-          <div className="lg:col-span-7 bg-[#1D0A29]/60 border border-[#B9955B]/25 rounded-lg p-8 sm:p-12 backdrop-blur-md shadow-2xl">
+          <div className="lg:col-span-7 bg-[#1D0A29]/60 border border-[#B9955B]/25 rounded-xl p-5 sm:p-10 md:p-12 backdrop-blur-md shadow-2xl">
             {submitted ? (
               <div className="text-center py-12 space-y-6 animate-in fade-in zoom-in-95 duration-500">
                 <div className="w-16 h-16 rounded-full bg-[#3B174D] border border-[#B9955B] flex items-center justify-center mx-auto text-[#B9955B]">

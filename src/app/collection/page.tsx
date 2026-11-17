@@ -25,21 +25,21 @@ export default function CollectionPage() {
         );
 
   return (
-    <div className="min-h-screen bg-[#12041A] text-[#F4EAF2] pt-32 pb-24">
+    <div className="min-h-screen bg-[#12041A] text-[#F4EAF2] pt-24 sm:pt-32 pb-16 sm:pb-24">
       {/* Background radial violet glow */}
       <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-[#3B174D]/25 blur-[140px] pointer-events-none rounded-full" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         {/* Page Editorial Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-[#B9955B]/30 bg-[#3B174D]/30 mb-4">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-[#B9955B]/30 bg-[#3B174D]/30 mb-3 sm:mb-4">
             <Sparkles className="w-3.5 h-3.5 text-[#B9955B]" />
-            <span className="text-[10px] uppercase tracking-[0.3em] text-[#B9955B] font-mono">
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#B9955B] font-mono">
               Opus Flacons • Haute Parfumerie
             </span>
           </div>
 
-          <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-light text-[#F4EAF2] tracking-tight">
+          <h1 className="font-serif text-3xl sm:text-6xl md:text-7xl font-light text-[#F4EAF2] tracking-tight">
             THE COLLECTION
             <br />
             <span className="italic font-normal gold-gradient-text">
@@ -47,7 +47,7 @@ export default function CollectionPage() {
             </span>
           </h1>
 
-          <p className="font-sans text-xs sm:text-sm text-[#9B709F] mt-4 max-w-xl mx-auto leading-relaxed">
+          <p className="font-sans text-xs sm:text-sm text-[#9B709F] mt-3 sm:mt-4 max-w-xl mx-auto leading-relaxed px-2">
             Four distinct olfactory architectures, each formulated in high
             extrait concentration with noble Grasse raw materials and poured
             into heavy hand-polished French crystal.
@@ -55,7 +55,7 @@ export default function CollectionPage() {
         </div>
 
         {/* Filter Bar */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-16 border-y border-[#B9955B]/15 py-4">
+        <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-4 mb-10 sm:mb-16 border-y border-[#B9955B]/15 py-3 sm:py-4">
           <div className="hidden sm:flex items-center space-x-2 text-[#9B709F] text-[11px] uppercase tracking-wider font-mono mr-4">
             <Filter className="w-3.5 h-3.5 text-[#B9955B]" />
             <span>Filter Family:</span>
@@ -67,7 +67,7 @@ export default function CollectionPage() {
               <button
                 key={fam.id}
                 onClick={() => setSelectedFilter(fam.id)}
-                className={`text-[11px] uppercase tracking-[0.2em] px-4 py-2 rounded-full transition-all duration-300 ${
+                className={`text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-all duration-300 ${
                   isSelected
                     ? "bg-[#3B174D] text-[#F4EAF2] border border-[#B9955B] font-medium"
                     : "bg-[#1D0A29]/50 text-[#9B709F] hover:text-[#F4EAF2] border border-transparent hover:border-white/10"
@@ -80,11 +80,11 @@ export default function CollectionPage() {
         </div>
 
         {/* The Flacon Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-14">
           {filtered.map((frag, idx) => (
             <div
               key={frag.slug}
-              className="group relative bg-[#1D0A29]/50 border border-[#B9955B]/20 rounded-lg overflow-hidden hover:border-[#B9955B] transition-all duration-500 shadow-2xl flex flex-col justify-between"
+              className="group relative bg-[#1D0A29]/50 border border-[#B9955B]/20 rounded-xl overflow-hidden hover:border-[#B9955B] transition-all duration-500 shadow-2xl flex flex-col justify-between"
             >
               {/* Bottle Showcase Image */}
               <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#160620]">
@@ -98,7 +98,7 @@ export default function CollectionPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1D0A29] via-transparent to-transparent pointer-events-none" />
 
                 {/* Top badges */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 flex items-center justify-between">
                   <span className="px-2.5 py-1 bg-[#12041A]/85 backdrop-blur-md rounded border border-[#B9955B]/40 text-[9px] uppercase tracking-widest text-[#B9955B] font-mono">
                     {frag.id}
                   </span>
@@ -109,7 +109,7 @@ export default function CollectionPage() {
               </div>
 
               {/* Fragrance Meta Details */}
-              <div className="p-8 sm:p-10 flex flex-col justify-between flex-grow space-y-6">
+              <div className="p-5 sm:p-10 flex flex-col justify-between flex-grow space-y-4 sm:space-y-6">
                 <div>
                   <div className="flex items-center space-x-2 text-[10px] uppercase tracking-[0.25em] text-[#9B709F] font-mono mb-2">
                     <span>{frag.olfactiveFamily}</span>

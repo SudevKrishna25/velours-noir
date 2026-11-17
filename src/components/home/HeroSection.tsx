@@ -14,8 +14,11 @@ export default function HeroSection() {
   const contentRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
-  // Mouse Parallax on Desktop
+  // Mouse Parallax on Desktop only
   useEffect(() => {
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    if (isTouch) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       if (!heroRef.current) return;
       const { clientWidth, clientHeight } = heroRef.current;
@@ -33,7 +36,6 @@ export default function HeroSection() {
     if (!heroRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Scrub animation as hero leaves viewport
       gsap.to(contentRef.current, {
         scrollTrigger: {
           trigger: heroRef.current,
@@ -41,8 +43,8 @@ export default function HeroSection() {
           end: "bottom top",
           scrub: 1,
         },
-        y: -120,
-        opacity: 0.1,
+        y: -90,
+        opacity: 0.15,
         ease: "power1.out",
       });
 
@@ -53,9 +55,9 @@ export default function HeroSection() {
           end: "bottom top",
           scrub: 1.2,
         },
-        scale: 1.15,
-        y: 80,
-        filter: "brightness(0.4) contrast(1.2)",
+        scale: 1.12,
+        y: 60,
+        filter: "brightness(0.45) contrast(1.15)",
         ease: "none",
       });
     }, heroRef);
@@ -67,7 +69,7 @@ export default function HeroSection() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#12041A] pt-28 pb-20"
+      className="relative min-h-[92vh] sm:min-h-screen flex items-center justify-center overflow-hidden bg-[#12041A] pt-24 sm:pt-28 pb-16 sm:pb-20"
       data-cursor="DISCOVER"
     >
       {/* Background Cinematic Campaign Flacon with Parallax & Scroll Scale */}
@@ -76,7 +78,7 @@ export default function HeroSection() {
           ref={imageContainerRef}
           className="relative w-full h-full transform transition-transform duration-700 ease-out will-change-transform scale-105"
           style={{
-            transform: `scale(1.06) translate3d(${tilt.x * 0.5}px, ${tilt.y * 0.5}px, 0)`,
+            transform: `scale(1.05) translate3d(${tilt.x * 0.4}px, ${tilt.y * 0.4}px, 0)`,
           }}
         >
           <Image
@@ -95,24 +97,24 @@ export default function HeroSection() {
       </div>
 
       {/* Floating Gold Particles in the atmosphere */}
-      <GoldParticles count={36} />
+      <GoldParticles count={32} />
 
       {/* Hero Content Layer */}
       <div
         ref={contentRef}
-        className="relative z-20 max-w-6xl mx-auto px-6 sm:px-10 text-center flex flex-col items-center will-change-transform"
+        className="relative z-20 max-w-6xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center will-change-transform"
       >
         {/* Editorial Sub-badge */}
-        <div className="inline-flex items-center space-x-3 mb-6 px-4 py-1.5 rounded-full border border-[#B9955B]/30 bg-[#3B174D]/50 backdrop-blur-md animate-in fade-in duration-700">
+        <div className="inline-flex items-center space-x-2.5 mb-5 px-3.5 py-1 rounded-full border border-[#B9955B]/30 bg-[#3B174D]/50 backdrop-blur-md animate-in fade-in duration-700">
           <span className="w-1.5 h-1.5 rounded-full bg-[#B9955B] animate-ping" />
-          <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-[#F4EAF2] font-mono">
+          <span className="text-[9px] sm:text-[11px] uppercase tracking-[0.25em] text-[#F4EAF2] font-mono">
             Place Vendôme • Collection Privée
           </span>
         </div>
 
         {/* Monumental Headline */}
-        <div className="overflow-hidden mb-6">
-          <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-[0.05em] text-[#F4EAF2] leading-[1.08] max-w-5xl">
+        <div className="overflow-hidden mb-5">
+          <h1 className="font-serif text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.04em] text-[#F4EAF2] leading-[1.12] sm:leading-[1.08] max-w-5xl">
             BEYOND FRAGRANCE.
             <br />
             <span className="italic font-normal gold-gradient-text block mt-1 sm:mt-2">
@@ -122,16 +124,16 @@ export default function HeroSection() {
         </div>
 
         {/* Supporting Copy */}
-        <p className="font-sans text-sm sm:text-base md:text-lg text-[#F4EAF2]/80 max-w-2xl font-light leading-relaxed mb-10 tracking-wide">
+        <p className="font-sans text-xs sm:text-base md:text-lg text-[#F4EAF2]/80 max-w-2xl font-light leading-relaxed mb-8 sm:mb-10 tracking-wide px-2">
           An invisible signature. An unforgettable presence. Formulated in Paris
           with noble Grasse extraits and poured into sculptural French crystal.
         </p>
 
         {/* Dual CTAs */}
-        <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-5 w-full sm:w-auto px-2 sm:px-0">
           <Link
             href="/collection"
-            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-[#3B174D] hover:bg-[#633A78] text-[#F4EAF2] text-xs uppercase tracking-[0.25em] font-medium rounded border border-[#B9955B]/60 hover:border-[#B9955B] transition-all duration-300 shadow-xl shadow-[#3B174D]/50"
+            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-7 py-3.5 sm:py-4 bg-[#3B174D] hover:bg-[#633A78] text-[#F4EAF2] text-[11px] sm:text-xs uppercase tracking-[0.22em] font-medium rounded border border-[#B9955B]/60 hover:border-[#B9955B] transition-all duration-300 shadow-xl shadow-[#3B174D]/50"
           >
             <span className="relative z-10 flex items-center space-x-2">
               <span>DISCOVER THE COLLECTION</span>
@@ -142,7 +144,7 @@ export default function HeroSection() {
 
           <Link
             href="/maison"
-            className="group inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-transparent hover:bg-[#1D0A29]/70 text-[#F4EAF2]/90 hover:text-[#B9955B] text-xs uppercase tracking-[0.25em] font-medium rounded border border-white/15 hover:border-[#B9955B]/40 transition-all duration-300 backdrop-blur-sm"
+            className="group inline-flex items-center justify-center w-full sm:w-auto px-7 py-3.5 sm:py-4 bg-transparent hover:bg-[#1D0A29]/70 text-[#F4EAF2]/90 hover:text-[#B9955B] text-[11px] sm:text-xs uppercase tracking-[0.22em] font-medium rounded border border-white/15 hover:border-[#B9955B]/40 transition-all duration-300 backdrop-blur-sm"
           >
             <Compass className="w-4 h-4 mr-2 text-[#9B709F] group-hover:text-[#B9955B] transition-colors" />
             <span>ENTER THE MAISON</span>
@@ -150,36 +152,36 @@ export default function HeroSection() {
         </div>
 
         {/* Editorial Footnote Details */}
-        <div className="mt-16 sm:mt-24 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-12 border-t border-[#B9955B]/20 pt-8 w-full max-w-4xl text-left">
-          <div>
-            <span className="block text-[10px] uppercase tracking-[0.25em] text-[#B9955B] font-mono">
+        <div className="mt-12 sm:mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 border-t border-[#B9955B]/20 pt-6 sm:pt-8 w-full max-w-4xl text-left">
+          <div className="p-2 sm:p-0">
+            <span className="block text-[9px] uppercase tracking-[0.2em] text-[#B9955B] font-mono">
               Concentration
             </span>
-            <p className="font-serif text-sm sm:text-base text-[#F4EAF2] mt-0.5">
+            <p className="font-serif text-xs sm:text-base text-[#F4EAF2] mt-0.5">
               Extrait de Parfum (32%)
             </p>
           </div>
-          <div>
-            <span className="block text-[10px] uppercase tracking-[0.25em] text-[#B9955B] font-mono">
+          <div className="p-2 sm:p-0">
+            <span className="block text-[9px] uppercase tracking-[0.2em] text-[#B9955B] font-mono">
               Master Atelier
             </span>
-            <p className="font-serif text-sm sm:text-base text-[#F4EAF2] mt-0.5">
+            <p className="font-serif text-xs sm:text-base text-[#F4EAF2] mt-0.5">
               18 Place Vendôme
             </p>
           </div>
-          <div>
-            <span className="block text-[10px] uppercase tracking-[0.25em] text-[#B9955B] font-mono">
+          <div className="p-2 sm:p-0">
+            <span className="block text-[9px] uppercase tracking-[0.2em] text-[#B9955B] font-mono">
               Flacon Design
             </span>
-            <p className="font-serif text-sm sm:text-base text-[#F4EAF2] mt-0.5">
+            <p className="font-serif text-xs sm:text-base text-[#F4EAF2] mt-0.5">
               Heavy French Crystal
             </p>
           </div>
-          <div>
-            <span className="block text-[10px] uppercase tracking-[0.25em] text-[#B9955B] font-mono">
+          <div className="p-2 sm:p-0">
+            <span className="block text-[9px] uppercase tracking-[0.2em] text-[#B9955B] font-mono">
               Artistic Opus
             </span>
-            <p className="font-serif text-sm sm:text-base text-[#F4EAF2] mt-0.5">
+            <p className="font-serif text-xs sm:text-base text-[#F4EAF2] mt-0.5">
               04 Signature Natures
             </p>
           </div>
@@ -187,11 +189,11 @@ export default function HeroSection() {
       </div>
 
       {/* Refined Scroll Indicator */}
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none opacity-70">
-        <span className="text-[9px] uppercase tracking-[0.3em] text-[#9B709F] mb-1.5 font-mono">
+      <div className="absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none opacity-60">
+        <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.3em] text-[#9B709F] mb-1 font-mono">
           Scroll to explore
         </span>
-        <div className="w-[1px] h-8 bg-gradient-to-b from-[#B9955B] to-transparent animate-pulse" />
+        <div className="w-[1px] h-6 sm:h-8 bg-gradient-to-b from-[#B9955B] to-transparent animate-pulse" />
       </div>
     </section>
   );

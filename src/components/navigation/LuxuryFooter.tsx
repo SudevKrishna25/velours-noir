@@ -170,21 +170,21 @@ export default function LuxuryFooter() {
               </div>
             ) : (
               <form onSubmit={handleNewsletterSubmit} className="space-y-2">
-                <div className="relative max-w-md">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 max-w-md">
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address..."
                     aria-label="Email address for private dispatches"
-                    className="w-full bg-[#1D0A29]/90 border border-[#B9955B]/30 focus:border-[#B9955B] rounded py-3 pl-4 pr-32 text-xs text-[#F4EAF2] placeholder:text-[#9B709F]/60 focus:outline-none transition-colors"
+                    className="flex-grow bg-[#1D0A29]/90 border border-[#B9955B]/30 focus:border-[#B9955B] rounded py-3 px-4 text-xs text-[#F4EAF2] placeholder:text-[#9B709F]/60 focus:outline-none transition-colors"
                   />
                   <button
                     type="submit"
-                    className="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-[#3B174D] hover:bg-[#633A78] text-[#F4EAF2] hover:text-[#B9955B] text-[10px] uppercase tracking-[0.2em] rounded border border-[#B9955B]/30 transition-all font-medium flex items-center space-x-1"
+                    className="px-5 py-3 bg-[#3B174D] hover:bg-[#633A78] text-[#F4EAF2] hover:text-[#B9955B] text-[10px] uppercase tracking-[0.2em] rounded border border-[#B9955B]/30 transition-all font-medium flex items-center justify-center space-x-1"
                   >
-                    <span>Request</span>
-                    <ArrowRight className="w-3 h-3" />
+                    <span>Request Protocol</span>
+                    <ArrowRight className="w-3 h-3 ml-1" />
                   </button>
                 </div>
                 {error && <p className="text-[11px] text-rose-300">{error}</p>}

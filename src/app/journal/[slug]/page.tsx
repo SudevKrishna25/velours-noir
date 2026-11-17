@@ -45,29 +45,29 @@ export default async function JournalArticlePage({ params }: PageProps) {
   const otherArticles = JOURNAL_ARTICLES.filter((a) => a.slug !== article.slug);
 
   return (
-    <article className="min-h-screen bg-[#12041A] text-[#F4EAF2] pt-28 pb-24">
+    <article className="min-h-screen bg-[#12041A] text-[#F4EAF2] pt-24 sm:pt-28 pb-16 sm:pb-24">
       {/* Background ambient radial glow */}
       <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#3B174D]/25 blur-[160px] pointer-events-none rounded-full" />
 
-      <div className="max-w-4xl mx-auto px-6 sm:px-10 relative z-10">
+      <div className="max-w-4xl mx-auto px-4 sm:px-8 lg:px-10 relative z-10">
         {/* Navigation back */}
-        <div className="mb-10 pb-4 border-b border-[#B9955B]/15 flex items-center justify-between">
+        <div className="mb-8 sm:mb-10 pb-3 sm:pb-4 border-b border-[#B9955B]/15 flex items-center justify-between">
           <Link
             href="/journal"
-            className="group inline-flex items-center space-x-2 text-xs uppercase tracking-[0.25em] text-[#9B709F] hover:text-[#B9955B] transition-colors"
+            className="group inline-flex items-center space-x-2 text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#9B709F] hover:text-[#B9955B] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
             <span>Return to Journal</span>
           </Link>
 
-          <span className="text-[10px] uppercase tracking-widest text-[#B9955B] font-mono">
+          <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#B9955B] font-mono">
             {article.category}
           </span>
         </div>
 
         {/* Article Header */}
-        <header className="mb-12 text-center space-y-4">
-          <div className="flex items-center justify-center space-x-4 text-xs text-[#9B709F] font-mono">
+        <header className="mb-8 sm:mb-12 text-center space-y-3 sm:space-y-4">
+          <div className="flex items-center justify-center space-x-3 text-xs text-[#9B709F] font-mono">
             <span className="flex items-center space-x-1">
               <Clock className="w-3.5 h-3.5 text-[#B9955B]" />
               <span>{article.readTime}</span>
@@ -80,7 +80,7 @@ export default async function JournalArticlePage({ params }: PageProps) {
             {article.title}
           </h1>
 
-          <p className="font-serif italic text-lg sm:text-2xl text-[#9B709F] max-w-2xl mx-auto">
+          <p className="font-serif italic text-base sm:text-2xl text-[#9B709F] max-w-2xl mx-auto px-2">
             &ldquo;{article.subtitle}&rdquo;
           </p>
 
@@ -93,7 +93,7 @@ export default async function JournalArticlePage({ params }: PageProps) {
         </header>
 
         {/* Lead Hero Image */}
-        <div className="relative aspect-[16/9] w-full rounded-lg overflow-hidden border border-[#B9955B]/30 shadow-2xl mb-14">
+        <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-xl overflow-hidden border border-[#B9955B]/30 shadow-2xl mb-10 sm:mb-14">
           <Image
             src={article.image}
             alt={article.title}

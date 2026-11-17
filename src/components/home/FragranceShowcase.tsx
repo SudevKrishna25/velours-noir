@@ -14,7 +14,7 @@ export default function FragranceShowcase() {
   const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
-    // Check if on desktop
+    // Only apply pinned horizontal scrolling on large desktop screens
     const isDesktop = window.innerWidth >= 1024;
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -38,7 +38,6 @@ export default function FragranceShowcase() {
         scrub: 1,
         anticipatePin: 1,
         onUpdate: (self) => {
-          // Calculate active slide index (0 to 3) based on scroll progress
           const index = Math.min(3, Math.floor(self.progress * 4));
           setActiveSlide(index);
         },
@@ -247,58 +246,76 @@ export default function FragranceShowcase() {
       </div>
 
       {/* MOBILE / TABLET REFINED VERTICAL STORYTELLING (< lg) */}
-      <div className="lg:hidden py-24 px-6 sm:px-10">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-[#B9955B] font-mono block mb-2">
+      <div className="lg:hidden py-16 sm:py-24 px-4 sm:px-8">
+        <div className="text-center max-w-xl mx-auto mb-12 sm:mb-16">
+          <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-[#B9955B] font-mono block mb-2">
             02 — The Collection Privée
           </span>
           <h2 className="font-serif text-3xl sm:text-5xl text-[#F4EAF2] font-light">
             THE ART OF SCENT
           </h2>
-          <p className="font-sans text-xs sm:text-sm text-[#9B709F] mt-2">
+          <p className="font-sans text-xs sm:text-sm text-[#9B709F] mt-2 px-2">
             Explore the four immortal extraits of Velours Noir.
           </p>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-10 sm:space-y-14">
           {FRAGRANCES.map((frag, idx) => (
             <div
               key={frag.slug}
-              className="bg-[#1D0A29]/70 border border-[#B9955B]/25 rounded-lg overflow-hidden p-6 sm:p-8"
+              className="bg-[#1D0A29]/75 border border-[#B9955B]/30 rounded-xl overflow-hidden p-5 sm:p-8 shadow-xl"
             >
-              <div className="relative aspect-[4/5] w-full rounded overflow-hidden mb-6">
+              <div className="relative aspect-[4/5] w-full rounded-lg overflow-hidden mb-6 bg-[#160620]">
                 <Image
                   src={frag.image}
                   alt={frag.name}
                   fill
                   className="object-cover"
                 />
-                <div className="absolute top-3 left-3 px-2 py-0.5 bg-[#12041A]/85 rounded text-[9px] uppercase tracking-widest text-[#B9955B] font-mono border border-white/10">
-                  Opus 0{idx + 1}
+                <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#12041A]/90 rounded text-[9px] uppercase tracking-widest text-[#B9955B] font-mono border border-white/10">
+                  Opus 0{idx + 1} • {frag.volume}
                 </div>
               </div>
 
-              <div className="space-y-3">
-                <span className="text-[10px] uppercase tracking-widest text-[#B9955B] font-mono">
-                  {frag.personality}
-                </span>
+              <div className="space-y-3.5">
+                <div className="flex items-center justify-between text-[10px] text-[#B9955B] font-mono">
+                  <span>{frag.personality}</span>
+                  <span className="text-[#9B709F]">{frag.olfactiveFamily}</span>
+                </div>
+
                 <h3 className="font-serif text-2xl sm:text-3xl text-[#F4EAF2]">
                   {frag.name}
                 </h3>
-                <p className="font-serif italic text-sm text-[#9B709F]">
+                <p className="font-serif italic text-xs sm:text-sm text-[#9B709F]">
                   &ldquo;{frag.headlineQuote}&rdquo;
                 </p>
                 <p className="font-sans text-xs text-[#F4EAF2]/80 leading-relaxed">
                   {frag.shortDescription}
                 </p>
 
-                <div className="pt-4">
+                {/* Notes Snapshot on Mobile */}
+                <div className="grid grid-cols-3 gap-2 pt-2 text-[10px]">
+                  <div className="p-2 bg-[#12041A]/80 rounded border border-white/5">
+                    <span className="text-[8px] uppercase font-mono text-[#9B709F] block">Top</span>
+                    <span className="font-serif text-[#F4EAF2] line-clamp-1">{frag.notes.top[0]?.name}</span>
+                  </div>
+                  <div className="p-2 bg-[#12041A]/80 rounded border border-white/5">
+                    <span className="text-[8px] uppercase font-mono text-[#9B709F] block">Heart</span>
+                    <span className="font-serif text-[#F4EAF2] line-clamp-1">{frag.notes.heart[0]?.name}</span>
+                  </div>
+                  <div className="p-2 bg-[#12041A]/80 rounded border border-white/5">
+                    <span className="text-[8px] uppercase font-mono text-[#9B709F] block">Base</span>
+                    <span className="font-serif text-[#F4EAF2] line-clamp-1">{frag.notes.base[0]?.name}</span>
+                  </div>
+                </div>
+
+                <div className="pt-3">
                   <Link
                     href={`/fragrances/${frag.slug}`}
-                    className="inline-flex items-center space-x-2 text-xs uppercase tracking-wider text-[#B9955B] font-medium"
+                    className="w-full inline-flex items-center justify-center py-3 px-4 bg-[#3B174D] hover:bg-[#633A78] text-[#F4EAF2] text-[11px] uppercase tracking-wider rounded border border-[#B9955B]/40 font-medium transition-colors"
                   >
                     <span>View Fragrance Details</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 ml-2 text-[#B9955B]" />
                   </Link>
                 </div>
               </div>
