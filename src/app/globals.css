@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --soft-ivory: #F4EAF2;
+    --mauve: #9B709F;
+    --royal-violet: #633A78;
+    --deep-plum: #3B174D;
+    --old-gold: #B9955B;
+    --near-black: #12041A;
+    --dark-plum: #1D0A29;
+    --plum-surface: #270E38;
+    --gold-light: #D4AF6E;
+    --gold-dark: #8A6B36;
+    --gold-muted: rgba(185, 149, 91, 0.35);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--near-black);
+    color: var(--soft-ivory);
+    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    background-color: var(--near-black);
+    color: var(--soft-ivory);
+    overflow-x: hidden;
+    position: relative;
+    letter-spacing: 0.015em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: #633A78;
+    color: #F4EAF2;
+  }
+}
+
+/* Custom typography classes */
+.font-serif {
+  font-family: var(--font-serif), "Cormorant Garamond", "Bodoni Moda", Didot, Georgia, serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Luxury Brand Colors */
+.bg-deep-plum {
+  background-color: #3B174D;
+}
+.bg-near-black {
+  background-color: #12041A;
+}
+.bg-dark-plum {
+  background-color: #1D0A29;
+}
+.bg-royal-violet {
+  background-color: #633A78;
+}
+.bg-mauve {
+  background-color: #9B709F;
+}
+.bg-soft-ivory {
+  background-color: #F4EAF2;
+}
+
+.text-soft-ivory {
+  color: #F4EAF2;
+}
+.text-old-gold {
+  color: #B9955B;
+}
+.text-gold-light {
+  color: #D4AF6E;
+}
+.text-mauve {
+  color: #9B709F;
+}
+.text-royal-violet {
+  color: #633A78;
+}
+.text-deep-plum {
+  color: #3B174D;
+}
+
+.border-old-gold {
+  border-color: #B9955B;
+}
+.border-gold-subtle {
+  border-color: rgba(185, 149, 91, 0.25);
+}
+.border-gold-medium {
+  border-color: rgba(185, 149, 91, 0.5);
+}
+.border-violet-subtle {
+  border-color: rgba(99, 58, 120, 0.35);
+}
+
+/* Luxury Accents and Gradients */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #F4EAF2 0%, #D4AF6E 40%, #B9955B 75%, #8A6B36 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-shimmer-border {
+  border-image: linear-gradient(90deg, rgba(185, 149, 91, 0), rgba(185, 149, 91, 0.8), rgba(185, 149, 91, 0)) 1;
+}
+
+/* Subtle Film Grain Texture Overlay */
+.film-grain {
+  background-image: radial-gradient(rgba(244, 234, 242, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Vignette overlay */
+.luxury-vignette {
+  box-shadow: inset 0 0 140px rgba(18, 4, 26, 0.88);
+}
+
+/* Custom Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #12041A;
+}
+::-webkit-scrollbar-thumb {
+  background: #3B174D;
+  border-radius: 3px;
+  border: 1px solid rgba(185, 149, 91, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #633A78;
+}
+
+/* Lenis smooth scroll recommended CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
